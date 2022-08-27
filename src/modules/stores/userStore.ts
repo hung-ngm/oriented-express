@@ -21,7 +21,6 @@ class UserStore {
     makeAutoObservable(this);
 
     this.unsubscribeUser = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       this.setUser(user);
     });
 
@@ -29,7 +28,7 @@ class UserStore {
       () => this.user,
       (user) => {
         if (user) {
-          console.log(user);
+          store.songStore.subscribeStore();
         }
       }
     );
@@ -39,9 +38,7 @@ class UserStore {
     console.log('response', response);
     if (response?.type === "success") {
       const { id_token } = response.params;
-      console.log('id_token', id_token);
       const credential = GoogleAuthProvider.credential(id_token);
-      console.log('credential', credential);
       await signInWithCredential(auth, credential);
     }
   };

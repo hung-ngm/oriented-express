@@ -6,7 +6,13 @@ export type AuthStackParamList = {
 };
 
 export type AppStackParamList = {
+  Root: undefined;
+}
+
+export type RootTabParamList = {
   Home: undefined;
+  Friends: undefined;
+  GlobalChart: undefined;
 }
 
 export type AppNavigationProp = NativeStackNavigationProp<AppStackParamList>
