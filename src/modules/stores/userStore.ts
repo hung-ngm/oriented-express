@@ -1,10 +1,16 @@
-import { auth, signInWithPhoneNumber, db } from '../utils/firebase';
-import { User } from '../../types/user';
-import { GoogleAuthProvider, signInWithCredential, onAuthStateChanged, User as FirebaseUser } from '@firebase/auth';
-import { makeAutoObservable, runInAction, reaction } from 'mobx';
-import { AuthSessionResult } from 'expo-auth-session';
-import { doc, setDoc, Unsubscribe } from '@firebase/firestore';
-import { store } from './store';
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithCredential,
+  User as FirebaseUser,
+} from "@firebase/auth";
+import { doc, serverTimestamp, setDoc, Unsubscribe } from "@firebase/firestore";
+import { AuthSessionResult } from "expo-auth-session";
+import { makeAutoObservable, reaction } from "mobx";
+// import * as RootNavigation from "../modules/navigation/components/RootNavigation";
+import { User } from "../../types/user";
+import { auth, db } from "../utils/firebase";
+import { store } from "./store";
 
 class UserStore {
   user: User | null = null;
@@ -15,6 +21,7 @@ class UserStore {
     makeAutoObservable(this);
 
     this.unsubscribeUser = onAuthStateChanged(auth, (user) => {
+      console.log(user);
       this.setUser(user);
     });
 
@@ -22,52 +29,56 @@ class UserStore {
       () => this.user,
       (user) => {
         if (user) {
-
+          console.log(user);
         }
       }
-    )
+    );
   }
 
   signInGoogle = async (response: AuthSessionResult) => {
-    if (response?.type === 'success') {
+    console.log('response', response);
+    if (response?.type === "success") {
       const { id_token } = response.params;
+      console.log('id_token', id_token);
       const credential = GoogleAuthProvider.credential(id_token);
+      console.log('credential', credential);
       await signInWithCredential(auth, credential);
     }
-  }
-
-  // signUpMobilePhone = async () => {
-  //   this.loading = true;
-
-  //   const appVerifier = window.recaptchaVerifier;
-
-  //   if (this.user && this.user.phoneNumber) {
-  //     await signInWithPhoneNumber(auth, this.user.phoneNumber, appVerifier);
-  //   }
-
-  //   runInAction(() => {
-  //     this.loading = false;
-  //   });
-  // }
+  };
 
   signOut = async () => {
     if (this.user) {
       await auth.signOut();
     }
-  }
+  };
 
-  setUser = (user : FirebaseUser | null) => {
+  setUser = (user: FirebaseUser | null) => {
     if (user) {
       this.user = {
         uid: user.uid,
         email: user.email!,
-        phoneNumber: user.phoneNumber!
       };
     } else {
       this.user = null;
     }
+
     this.userLoading = false;
-  }
+  };
+
+  // updateUserProfile = async (image: string, job: string, age: number) => {
+  //   if (!this.user) return;
+
+  //   await setDoc(doc(db, "users", this.user.uid), {
+  //     id: this.user.uid,
+  //     displayName: this.user.displayName,
+  //     photoURL: image,
+  //     job,
+  //     age,
+  //     timestamp: serverTimestamp(),
+  //   });
+
+  //   RootNavigation.navigate("Home");
+  // };
 }
 
 export default UserStore;

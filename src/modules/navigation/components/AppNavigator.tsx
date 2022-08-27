@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import HomeScreen from "../../home/HomeScreen";
+import { AppStackParamList } from "../../../types/navigation";
+
+const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppNavigator = () => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>AppNavigator</Text>
-        </View>
-    )
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    title: {
-        paddingTop: 10
-    }
-})
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Group>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
 
 export default AppNavigator;
