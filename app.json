@@ -1,0 +1,40 @@
+{
+    "expo": {
+      "name": "oriented-express",
+      "slug": "oriented-express",
+      "description": "Gather the knowledge about the religion and philosophy in the fastest way",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "userInterfaceStyle": "automatic",
+      "splash": {
+        "image": "./assets/adaptive-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
+      "updates": {
+        "fallbackToCacheTimeout": 0
+      },
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "ios": {
+        "supportsTablet": true,
+        "bundleIdentifier": "com.iosorientedexpress",
+        "config": {
+          "googleSignIn": {
+            "reservedClientId": "936308293416-man9p7338uot4hq0v1302o6hc60pj0hs.apps.googleusercontent.com"
+          }
+        }
+      },
+      "android": {
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/adaptive-icon.png",
+          "backgroundColor": "#FFFFFF"
+        },
+        "package": "com.iosorientedexpress"
+      },
+      "web": {
+        "favicon": "./assets/adaptive-icon.png"
+      }
+    }
+  }
