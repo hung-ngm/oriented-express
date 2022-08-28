@@ -16,27 +16,18 @@ interface SongItemProps {
 }
 
 const SongItem = ({ song, onPress }: SongItemProps) => {
-    const { name, imageUrl } = song;
+    const { name, imageUrl, artists } = song;
     console.log('song', song);
 
     return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-        <View style={styles.profileAvatarContainer}>
-        <UserAvatar 
-            imageUrl="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg" 
-            width={60}
-            height={60}
-            borderRadius={30}
-            extraProps={{ marginLeft: 10 }}
-        /> 
-        </View>
         <View style={styles.songPreviewTextContainer}>
             <View style={styles.firstRow}>
                 <Text style={styles.songTitle}>{name}</Text>
             </View>
-            {/* <View style={styles.secondRow}>
-                <Text style={styles.songAuthors}>{authors}</Text>
-            </View>  */}
+            <View style={styles.secondRow}>
+                <Text style={styles.songArtists}>{artists}</Text>
+            </View> 
         </View>
         <AlbumCover
             imageUrl={imageUrl} 
@@ -77,7 +68,7 @@ const styles = StyleSheet.create({
     secondRow: {
       flexDirection: "row",
     },
-    songAuthors: {
+    songArtists: {
       fontWeight: 'bold',
       flex: 4
     },

@@ -5,6 +5,7 @@ import PromptImage from '../../common/PromptImage';
 import SearchBar from './components/SearchBar';
 import SongList from './components/SongList';
 import { observer } from 'mobx-react-lite';
+import { getAllArtists } from '../utils/spotify';
 
 import {
     SPOTIFY_CLIENT_ID,
@@ -29,12 +30,25 @@ const HomeScreen = () => {
             "&client_secret=" +
             SPOTIFY_CLIENT_SECRET,
         };
+        
         fetch("https://accounts.spotify.com/api/token", authParameters)
           .then((result) => result.json())
           .then((data) => { 
-            console.log('data', data);
             setAccessToken(data.access_token)
         });
+        console.log(accessToken);
+
+        fetch("https://api.spotify.com/v1/me", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + 'BQA5k0MEn_esBBnowobKPX5ldJuaJwM6335s5BcNaVC-qyVpZ7ydQNx-KH3v9uiWS0L2LBKJ-4O8t3w9VUGwaHB1Wj9L1r0WcT8Y8S8KJ45K9Mos4RYUD45KNmLYcXyBQvELGD7g43SVWs67IcXP7Q6-mMv2tR-X4ia6USCVsHkpX2YhDMJSO_zhEQQObHE7A3M2ock2'
+            }
+        })
+            .then((result) => result.json())
+            .then((data) => {
+                console.log('me', data);
+            })
         if (searchInput != "") {
           search();
         }
@@ -66,7 +80,7 @@ const HomeScreen = () => {
                         uri: item.uri,
                         external_urls: item.external_urls,
                         href: item.href,
-                        artists: item.artists,
+                        artists: getAllArtists(item.artists),
                         imageUrl: item.album.images[0].url,
                         previewUrl: item.preview_url,
                         
@@ -90,7 +104,7 @@ const HomeScreen = () => {
                 </View>
                 <View style={styles.promptContainer}>
                     <PromptImage
-                        imageUrl="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg"
+                        imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1200px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
                         width={360}
                         height={360}
                     />

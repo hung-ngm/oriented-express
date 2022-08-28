@@ -29,6 +29,7 @@ class UserStore {
       (user) => {
         if (user) {
           store.songStore.subscribeStore();
+          store.profileStore.subscribeStore(user);
         }
       }
     );
@@ -62,20 +63,18 @@ class UserStore {
     this.userLoading = false;
   };
 
-  // updateUserProfile = async (image: string, job: string, age: number) => {
-  //   if (!this.user) return;
+  updateUserProfile = async (image: string, name: string, job: string, age: number) => {
+    if (!this.user) return;
 
-  //   await setDoc(doc(db, "users", this.user.uid), {
-  //     id: this.user.uid,
-  //     displayName: this.user.displayName,
-  //     photoURL: image,
-  //     job,
-  //     age,
-  //     timestamp: serverTimestamp(),
-  //   });
+    await setDoc(doc(db, "users", this.user.uid), {
+      id: this.user.uid,
+      name: name,
+      photoUrl: image,
+      job,
+    });
 
-  //   RootNavigation.navigate("Home");
-  // };
+    // RootNavigation.navigate("Home");
+  };
 }
 
 export default UserStore;

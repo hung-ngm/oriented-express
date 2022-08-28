@@ -43,7 +43,7 @@ export const SongList = () => {
     <View style={styles.container}>
         <View style={styles.promptContainer}>
             <PromptImage
-                imageUrl="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg"
+                imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1200px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
                 width={200}
                 height={200}
             />

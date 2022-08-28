@@ -83,7 +83,7 @@ class SongStore {
             id: snap.id,
             name: snap.data().name,
             title: snap.data().title,
-            authors: snap.data().authors,
+            artists: snap.data().artists,
             album: snap.data().album,
             imageUrl: snap.data().imageUrl,
             previewUrl: snap.data().previewUrl,

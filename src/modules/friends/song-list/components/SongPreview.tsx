@@ -17,7 +17,7 @@ interface SongPreviewProps {
 }
 
 const SongPreview = ({ song, onPress }: SongPreviewProps) => {
-    const { name, authors, album, imageUrl } = song;
+    const { name, artists, album, imageUrl } = song;
     const { user } = useStore().userStore;
 
     return (
@@ -36,7 +36,7 @@ const SongPreview = ({ song, onPress }: SongPreviewProps) => {
                 <Text style={styles.songTitle}>{name}</Text>
             </View>
             <View style={styles.secondRow}>
-                <Text style={styles.songAuthors}>{authors}</Text>
+                <Text style={styles.songArtists}>{artists}</Text>
             </View> 
         </View>
         <AlbumCover
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     secondRow: {
       flexDirection: "row",
     },
-    songAuthors: {
+    songArtists: {
       fontWeight: 'bold',
       flex: 4
     },

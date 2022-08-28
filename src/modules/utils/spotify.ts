@@ -1,9 +1,12 @@
-import base64 from 'react-native-base64';
-import {
-    SPOTIFY_CLIENT_ID,
-    SPOTIFY_CLIENT_SECRET,
-} from '@env';
-
-const apiPrefix = '';
-const clientId = '';
-const clientSecret = '';
+export const getAllArtists = (artists: Array<any>) : string => {
+    let result = '';
+    artists.forEach((artist, index) => {
+        if (index === artists.length - 1) {
+            result += artist.name;
+        } else {
+            result += artist.name + ', ';
+        }
+    });
+    result = result.slice(0, 30);
+    return result;
+}
