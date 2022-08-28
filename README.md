@@ -6,6 +6,10 @@ A mobile application to help music aficionados connect and share their music usi
 - Let users choose songs on their prompt
 - Find which songs other users choose on the same picture prompt
 
+![GoogleSignIn](./assets/GoogleSignIn.png)
+![Home](./assets/HomeTab.png)
+![Friends](./assets/FriendsTab.png)
+
 
 ## 🚀 How to use
 
